@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ai-tool-compliance-db",
+  "description": "Schema for the AI Tool Compliance Database (ai_tools_db.json).",
+  "type": "object",
+  "required": ["name", "description", "license", "version", "generated", "disclaimer", "tool_count", "tools"],
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "maintainer": { "type": "string" },
+    "license": { "type": "string" },
+    "version": { "type": "string" },
+    "generated": { "type": "string", "format": "date" },
+    "disclaimer": { "type": "string" },
+    "tool_count": { "type": "integer", "minimum": 1 },
+    "tools": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/tool" }
+    }
+  },
+  "definitions": {
+    "tool": {
+      "type": "object",
+      "required": [
+        "id", "vendor", "product", "tier", "tier_category", "category",
+        "trains_on_input_by_default", "training_opt_out_available",
+        "baa_available", "baa_notes", "dpa_available", "data_retention_default",
+        "confidence", "source_urls", "last_verified", "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable unique identifier, kebab-case: <vendor>-<product>-<tier>."
+        },
+        "vendor": { "type": "string" },
+        "product": { "type": "string" },
+        "tier": { "type": "string" },
+        "tier_category": {
+          "type": "string",
+          "enum": ["Consumer Free", "Consumer Paid", "Business/Team", "Enterprise", "API/Developer"]
+        },
+        "category": {
+          "type": "string",
+          "description": "What kind of tool this is, e.g. 'General-purpose chatbot', 'Meeting transcription', 'AI medical scribe'."
+        },
+        "trains_on_input_by_default": {
+          "description": "Whether the vendor trains models on user input at this tier by default.",
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string", "description": "Free-text qualifier when the answer is conditional/nuanced." }
+          ]
+        },
+        "training_opt_out_available": {
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string" }
+          ]
+        },
+        "baa_available": {
+          "description": "true = available at this tier; false = not available; \"conditional\" = available only under specific conditions (sales-managed account, admin activation, negotiated enterprise terms, etc.) — see baa_notes.",
+          "oneOf": [
+            { "type": "boolean" },
+            { "const": "conditional" }
+          ]
+        },
+        "baa_notes": {
+          "type": "string",
+          "description": "Required explanation of the baa_available value, especially for \"conditional\" entries."
+        },
+        "dpa_available": { "type": "boolean" },
+        "data_retention_default": { "type": "string" },
+        "confidence": {
+          "type": "string",
+          "enum": ["verified", "general_knowledge"],
+          "description": "'verified' = confirmed against the vendor's own current published policy page as of last_verified, with source_urls populated. 'general_knowledge' = well-established public reporting, not individually re-verified in this build; lower confidence."
+        },
+        "source_urls": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "last_verified": { "type": "string", "format": "date" },
+        "notes": {
+          "type": "string",
+          "description": "Practical guidance for an engineer using this entry in a real engagement — what to double-check, common misconceptions, risk context."
+        }
+      }
+    }
+  }
+}
