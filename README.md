@@ -7,7 +7,7 @@ available, whether a Data Processing Agreement (DPA) is available, and
 default data retention.
 
 Built and maintained by [Andrew Rogers](https://github.com/g1n0mag1k) /
-Sui-Generis LLC, for use in HIPAA-adjacent AI governance work (AI Data
+Sui-Generis, for use in HIPAA-adjacent AI governance work (AI Data
 Exposure Registers, vendor risk assessments, acceptable-use policy
 drafting). Released publicly because this lookup is useful to anyone doing
 this kind of work, not just paying clients.
@@ -135,7 +135,7 @@ Corrections, new tools, and tier updates are welcome. To contribute:
 5. Open a PR.
 
 If you work in AI governance / compliance documentation and find this
-useful, [Sui-Generis LLC](mailto:rogersandy90@gmail.com) does paid AI Data
+useful, [Sui-Generis](mailto:rogersandy90@gmail.com) does paid AI Data
 Exposure Register engagements for law firms and medical practices — this
 database is the open-source core of that offering.
 

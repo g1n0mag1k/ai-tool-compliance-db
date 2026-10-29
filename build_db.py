@@ -486,7 +486,7 @@ DB = {
     "name": "ai-tool-compliance-db",
     "description": "Open-source reference database mapping AI tools to BAA/DPA availability, "
                    "default training behavior, and data retention posture, by product tier.",
-    "maintainer": "Sui-Generis LLC (Andrew Rogers)",
+    "maintainer": "Sui-Generis (Andrew Rogers)",
     "license": "MIT",
     "version": "1.0.0",
     "generated": TODAY,
